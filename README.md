@@ -1,1 +1,1 @@
-# Event-Organizer-Eventtify
+# Event-Organizer-Eventify
