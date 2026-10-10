@@ -5,13 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventify - Event Organizer</title>
 
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="output.css">
-</head>
-<body>
-    <header>
-        <nav>
-
+    <link rel="stylesheet" href="style.css">
+</head> 
+<body class="bg-white text-[#011502] antialiased">
+    <header id="navbar" class="fixed top-0 inset-x-0 z-40 bg-white/90 backdrop-blur transition-shadow">
+        <nav class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="#home" class="text-2xl font-extrabold text-[#011502]">Event<span class="text-[#32746D]">ify</span></a>
+            <ul class="hidden md:flex items-center gap-8 font-medium">
+                <li><a href="#home" class="nav-link hover:text-[#32746D]">Beranda</a></li>
+                <li><a href="#layanan" class="nav-link hover:text-[#32746D]">Layanan</a></li>
+                <li><a href="#portfolio" class="nav-link hover:text-[#32746D]">Portfolio</a></li>
+                <li><a href="#gallery" class="nav-link hover:text-[#32746D]">Gallery</a></li>
+                <li><a href="#paket" class="nav-link hover:text-[#32746D]">Paket</a></li>
+                <li><a href="#calculator" class="nav-link hover:text-[#32746D]">Kalkulator</a></li>
+            </ul>
+            <a href="#request" class="hidden md:inline-block bg-[#104F55] hover:bg-[#32746D] text-white font-semibold px-5 py-2 rounded-full transition">Request Event</a>
+            <button id="menu-btn" class="md:hidden text-3xl leading-none text-[#011502]" aria-label="Buka menu"><></button>
+        </nav>
+            <ul id="mobile-menu" class="hidden md:hidden bg-white border-t border-[#9EC5AB] px-4 py-4 space-y-3 font-medium">
+                <li><a href="#home" class="block hover:text-[#32746D]">Beranda</a></li>
+                <li><a href="#layanan" class="block hover:text-[#32746D]">Layanan</a></li>
+                <li><a href="#portfolio" class="block hover:text-[#32746D]">Portfolio</a></li>
+                <li><a href="#gallery" class="block hover:text-[#32746D]">Gallery</a></li>
+                <li><a href="#paket" class="block hover:text-[#32746D]">Paket</a></li>
+                <li><a href="#calculator" class="block hover:text-[#32746D]">Kalkulator</a></li>
+                <li><a href="#request" class="block text-[#104F55] font-semibold">Request Event</a></li>
+            </ul>
         </nav>
     </header>
 
