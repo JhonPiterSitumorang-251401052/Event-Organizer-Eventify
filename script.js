@@ -226,6 +226,11 @@ function renderPortfolio() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+    if (filterWrap && portfolioGrid) {
+        renderFilter();
+        renderPortfolio();
+    }
+    
     const btnHitung = document.getElementById("btn-hitung");
     const selectJenis = document.getElementById("calc-jenis");
     const selectPaket = document.getElementById("calc-paket");
