@@ -97,7 +97,52 @@
                         </ul>
                         <a href="#calculator" data-paket="exclusive" class="pilih-paket btn btn-outline">Pilih Exclusive</a>
                     </article>
- 
+                </div>
+            </div>
+        </section>
+        <section id="calculator" class="section">
+            <div class="wrap-md">
+                <div class="section-head">
+                    <p class="section-label">Budget Calculator</p>
+                    <h2 class="section-title">Hitung Estimasi Biayamu</h2>
+                    <p class="section-desc">Masukkan jumlah tamu dan pilih jenis acara untuk perkiraan biaya.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 grid-gap-lg">
+                    <!-- Input -->
+                    <div class="calc-box stack">
+                        <div>
+                            <label for="calc-jenis" class="form-label">Jenis Acara</label>
+                            <select id="calc-jenis" class="input-field">
+                                <option value="wedding">Wedding (Rp 150.000 / tamu)</option>
+                                <option value="birthday">Birthday (Rp 75.000 / tamu)</option>
+                                <option value="seminar">Seminar (Rp 60.000 / tamu)</option>
+                                <option value="corporate">Corporate (Rp 100.000 / tamu)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="calc-paket" class="form-label">Paket</label>
+                            <select id="calc-paket" class="input-field">
+                                <option value="basic">Basic (Rp 15.000.000)</option>
+                                <option value="premium">Premium (Rp 35.000.000)</option>
+                                <option value="exclusive">Exclusive (Rp 75.000.000)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="calc-tamu" class="form-label">Jumlah Tamu</label>
+                            <input type="number" id="calc-tamu" class="input-field" placeholder="Contoh: 150" min="10" max="2000">
+                            <p id="calc-error" class="error-text hidden"></p>
+                        </div>
+                        <fieldset>
+                            <legend class="fieldset-title">Layanan Tambahan (opsional)</legend>
+                            <label class="check-label"><input type="checkbox" name="addon" value="dekorasi"> Dekorasi tambahan (+Rp 5.000.000)</label>
+                            <label class="check-label"><input type="checkbox" name="addon" value="dokumentasi"> Dokumentasi foto dan video (+Rp 3.000.000)</label>
+                            <label class="check-label"><input type="checkbox" name="addon" value="hiburan"> Hiburan / live music (+Rp 4.000.000)</label>
+                        </fieldset>
+                        <button id="btn-hitung" type="button" class="btn btn-primary btn-block">Hitung Estimasi</button>
+                    </div>
+                    <div id="calc-result" class="calc-result">
+                        <p>Hasil estimasi akan tampil di sini setelah kamu menekan tombol <strong>Hitung Estimasi</strong>.</p>
+                    </div>
                 </div>
             </div>
         </section>
