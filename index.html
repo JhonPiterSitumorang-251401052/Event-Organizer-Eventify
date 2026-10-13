@@ -13,25 +13,26 @@
         <nav class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             <a href="#home" class="text-2xl font-extrabold text-[#011502]">Event<span class="text-[#32746D]">ify</span></a>
             <ul class="hidden md:flex items-center gap-8 font-medium">
-                <li><a href="#home" class="nav-link hover:text-[#32746D]">Beranda</a></li>
+                <li><a href="index.html" class="nav-link active hover:text-[#32746D]">Beranda</a></li>
                 <li><a href="#layanan" class="nav-link hover:text-[#32746D]">Layanan</a></li>
-                <li><a href="#portfolio" class="nav-link hover:text-[#32746D]">Portfolio</a></li>
-                <li><a href="#gallery" class="nav-link hover:text-[#32746D]">Gallery</a></li>
-                <li><a href="#paket" class="nav-link hover:text-[#32746D]">Paket</a></li>
-                <li><a href="#calculator" class="nav-link hover:text-[#32746D]">Kalkulator</a></li>
+                <li><a href="portfolio.html" class="nav-link hover:text-[#32746D]">Portfolio</a></li>
+                <li><a href="portfolio.html#gallery" class="nav-link hover:text-[#32746D]">Gallery</a></li>
+                <li><a href="paket.html" class="nav-link hover:text-[#32746D]">Paket</a></li>
+                <li><a href="paket.html#calculator" class="nav-link hover:text-[#32746D]">Kalkulator</a></li>
             </ul>
-            <a href="#request" class="hidden md:inline-block bg-[#104F55] hover:bg-[#32746D] text-white font-semibold px-5 py-2 rounded-full transition">Request Event</a>
+            <a href="paket.html#request" class="hidden md:inline-block bg-[#104F55] hover:bg-[#32746D] text-white font-semibold px-5 py-2 rounded-full transition">Request Event</a>
             <button id="menu-btn" class="md:hidden text-3xl leading-none text-[#011502]" aria-label="Buka menu"><></button>
+
+            <ul id="mobile-menu" class="hidden md:hidden bg-white border-t border-[#9EC5AB] px-4 py-4 space-y-3 font-medium">
+                <li><a href="#home" class="block hover:text-[#32746D]">Beranda</a></li>
+                <li><a href="#layanan" class="block hover:text-[#32746D]">Layanan</a></li>
+                <li><a href="#portfolio" class="block hover:text-[#32746D]">Portfolio</a></li>
+                <li><a href="#gallery" class="block hover:text-[#32746D]">Gallery</a></li>
+                <li><a href="#paket" class="block hover:text-[#32746D]">Paket</a></li>
+                <li><a href="#calculator" class="block hover:text-[#32746D]">Kalkulator</a></li>
+                <li><a href="#request" class="block text-[#104F55] font-semibold">Request Event</a></li>
+            </ul>
         </nav>
-        <ul id="mobile-menu" class="hidden md:hidden bg-white border-t border-[#9EC5AB] px-4 py-4 space-y-3 font-medium">
-            <li><a href="#home" class="block hover:text-[#32746D]">Beranda</a></li>
-            <li><a href="#layanan" class="block hover:text-[#32746D]">Layanan</a></li>
-            <li><a href="#portfolio" class="block hover:text-[#32746D]">Portfolio</a></li>
-            <li><a href="#gallery" class="block hover:text-[#32746D]">Gallery</a></li>
-            <li><a href="#paket" class="block hover:text-[#32746D]">Paket</a></li>
-            <li><a href="#calculator" class="block hover:text-[#32746D]">Kalkulator</a></li>
-            <li><a href="#request" class="block text-[#104F55] font-semibold">Request Event</a></li>
-        </ul>
     </header>
 
     <main class="pt-16">
@@ -43,8 +44,8 @@
                 <h1 class="hero-title">Wujudkan Momen <span>Tak Terlupakan</span> Bersama Eventify</h1>
                 <p class="hero-text">Kami menangani wedding, birthday, seminar, dan corporate event dengan perencanaan dan eksekusi yang matang.</p>
                 <div class="hero-actions">
-                    <a href="#request" class="btn text-[#104F55] font-semibold">Request Event</a>
-                    <a href="#portfolio" class="btn text-[#104F55] font-semibold">Lihat Portfolio</a>
+                    <a href="paket.html#request" class="btn text-[#104F55] font-semibold">Request Event</a>
+                    <a href="portfolio.html" class="btn text-[#104F55] font-semibold">Lihat Portfolio</a>
                 </div>
             </div>
         </section>
@@ -79,26 +80,39 @@
                 </div>
             </div>
         </section>
-
-        <section id="portfolio" class="section" style="background:#f4faf6;">
-            <!-- bagian 3: portfolio 12 event, dikelompokkan Wedding, Birthday, Seminar, Corporate -->
+        <section id="keunggulan" class="section section-alt">
             <div class="wrap">
                 <div class="section-head">
-                    <h2 class="section-title">Portfolio 12 Event</h2>
-                    <p class="section-desc">Dua belas acara yang pernah kami kerjakan di Medan dan sekitarnya, dikelompokkan menurut jenis acaranya.</p>
+                    <p class="section-label">Kenapa Eventify</p>
+                    <h2 class="section-title">Acara Tenang, Hasil Memuaskan</h2>
+                    <p class="section-desc">Tim kami mengurus detailnya, kamu menikmati harinya.</p>
                 </div>
 
-                <div id="filter" class="filter-wrap">
-                    <!-- diisi oleh script.js -->
-                </div>
-                <p id="portfolio-count" class="portfolio-count"></p>
-
-                <div id="portfolio-grid" class="event-grid">
-                    <!-- diisi oleh script.js -->
+                <div class="grid grid-cols-1 md:grid-cols-3 grid-gap" style="margin-top:2.5rem;">
+                    <article class="service-card">
+                        <h3 class="service-title">Perencanaan Matang</h3>
+                        <p class="service-text">Konsep, anggaran, dan rundown disusun sejak awal bersama kamu.</p>
+                    </article>
+                    <article class="service-card">
+                        <h3 class="service-title">Tim Berpengalaman</h3>
+                        <p class="service-text">Sudah menangani wedding, seminar, hingga gathering ribuan peserta.</p>
+                    </article>
+                    <article class="service-card">
+                        <h3 class="service-title">Harga Transparan</h3>
+                        <p class="service-text">Paket jelas dan ada kalkulator estimasi biaya sebelum kamu memutuskan.</p>
+                    </article>
                 </div>
             </div>
         </section>
-
+        <section class="cta-band">
+            <div class="wrap">
+                <h2 class="cta-title">Lihat Hasil Kerja Kami</h2>
+                <p class="cta-text">Jelajahi 12 event yang pernah kami tangani, lalu pilih paket yang cocok.</p>
+                <div class="cta-actions">
+                    <a href="portfolio.html" class="btn btn-light">Lihat Portfolio</a>
+                    <a href="paket.html" class="btn btn-outline-light">Lihat Paket</a>
+                </div>
+            </div>
         <section>
             <!-- bagian 4 -->
         </section>
