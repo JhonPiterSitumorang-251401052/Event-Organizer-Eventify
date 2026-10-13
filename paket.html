@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-white text-[#011502] antialiased">
-
-    <!-- ========== NAVBAR ========== -->
     <header id="navbar" class="fixed top-0 inset-x-0 z-40 bg-white/90 backdrop-blur transition-shadow">
         <nav class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             <a href="index.html" class="text-2xl font-extrabold text-[#011502]">Event<span class="text-[#32746D]">ify</span></a>
@@ -38,7 +36,71 @@
     </header>
 
     <main>
-        
+        <section class="page-header">
+            <div class="wrap fade-up">
+                <p class="page-header-eyebrow">Paket dan Request</p>
+                <h1 class="page-header-title">Pilih Paket, Hitung Biaya, Kirim Request</h1>
+                <p class="page-header-text">Tiga paket dengan harga transparan, kalkulator estimasi, dan formulir request event dalam satu halaman.</p>
+            </div>
+        </section>
+        <section id="paket" class="section section-alt">
+            <div class="wrap">
+                <div class="section-head">
+                    <p class="section-label">Paket Harga</p>
+                    <h2 class="section-title">Pilih Paket yang Sesuai</h2>
+                    <p class="section-desc">Harga transparan, bisa disesuaikan dengan kebutuhan acaramu.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 grid-gap-lg items-stretch">
+                    <article class="pkg">
+                        <h3 class="pkg-name">Basic</h3>
+                        <p class="pkg-sub">Untuk acara sederhana, hingga 100 tamu</p>
+                        <p class="pkg-price">Rp 15.000.000</p>
+                        <ul class="pkg-list">
+                            <li><span class="ok">1.</span> Konsultasi dan perencanaan konsep</li>
+                            <li><span class="ok">2.</span> Dekorasi standar</li>
+                            <li><span class="ok">3.</span> Sound system dasar</li>
+                            <li><span class="ok">4.</span> 1 MC</li>
+                            <li><span class="ok">5.</span> 3 crew pendamping</li>
+                            <li class="no">✕ Dokumentasi foto dan video</li>
+                            <li class="no">✕ Hiburan / live music</li>
+                        </ul>
+                        <a href="#calculator" data-paket="basic" class="pilih-paket btn btn-outline">Pilih Basic</a>
+                    </article>
+                    <article class="pkg pkg-featured">
+                        <span class="pkg-badge">PALING POPULER</span>
+                        <h3 class="pkg-name">Premium</h3>
+                        <p class="pkg-sub">Untuk acara menengah, hingga 250 tamu</p>
+                        <p class="pkg-price">Rp 35.000.000</p>
+                        <ul class="pkg-list">
+                            <li><span class="ok">1.</span> Semua fasilitas Basic</li>
+                            <li><span class="ok">2.</span> Dekorasi tematik custom</li>
+                            <li><span class="ok">3.</span> Sound dan lighting profesional</li>
+                            <li><span class="ok">4.</span> Dokumentasi foto dan video</li>
+                            <li><span class="ok">5.</span> Live music / hiburan</li>
+                            <li><span class="ok">6.</span> 8 crew pendamping</li>
+                            <li><span class="ok">7.</span> Koordinator hari-H</li>
+                        </ul>
+                        <a href="#calculator" data-paket="premium" class="pilih-paket btn btn-light">Pilih Premium</a>
+                    </article>
+                    <article class="pkg">
+                        <h3 class="pkg-name">Exclusive</h3>
+                        <p class="pkg-sub">Layanan penuh, hingga 500 tamu</p>
+                        <p class="pkg-price">Rp 75.000.000</p>
+                        <ul class="pkg-list">
+                            <li><span class="ok">1.</span> Semua fasilitas Premium</li>
+                            <li><span class="ok">2.</span> Dekorasi mewah dan panggung 3D</li>
+                            <li><span class="ok">3.</span> Dokumentasi + drone dan highlight video</li>
+                            <li><span class="ok">4.</span> Artis / entertainer pilihan</li>
+                            <li><span class="ok">5.</span> Katering premium dan tester menu</li>
+                            <li><span class="ok">6.</span> 15 crew pendamping</li>
+                            <li><span class="ok">7.</span> Event planner khusus (dedicated)</li>
+                        </ul>
+                        <a href="#calculator" data-paket="exclusive" class="pilih-paket btn btn-outline">Pilih Exclusive</a>
+                    </article>
+ 
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer id="kontak" class="footer">
