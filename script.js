@@ -303,3 +303,82 @@ document.addEventListener('keydown', function(event) {
         closeLightboxDirect();
     }
 });
+
+(function () {
+    const backToTop = document.getElementById("back-to-top");
+    if (!backToTop) return;
+    window.addEventListener("scroll", function () {
+        backToTop.classList.toggle("show", window.scrollY > 400);
+    });
+    backToTop.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+})();
+
+(function () {
+    const form = document.getElementById("request-form");
+    if (!form) return;
+
+    const tanggalInput = document.getElementById("tanggal");
+    const hariIni = new Date();
+    hariIni.setHours(0, 0, 0, 0);
+    tanggalInput.min = hariIni.getFullYear() + "-"
+        + String(hariIni.getMonth() + 1).padStart(2, "0") + "-"
+        + String(hariIni.getDate()).padStart(2, "0");
+
+    const aturan = {
+        nama: function (v) { return v.length < 3 ? "Nama minimal 3 karakter." : ""; },
+        email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "" : "Format email tidak valid."; },
+        telepon: function (v) {
+            const nomor = v.replace(/[\s-]/g, "");
+            return /^(\+62|62|0)8\d{8,11}$/.test(nomor) ? "" : "Nomor harus diawali 08 atau +628 (10-13 digit).";
+        },
+        jenis: function (v) { return v ? "" : "Pilih jenis acara."; },
+        tanggal: function (v) {
+            if (!v) return "Tanggal acara wajib diisi.";
+            return new Date(v + "T00:00:00") < hariIni ? "Tanggal tidak boleh sebelum hari ini." : "";
+        },
+        tamu: function (v) {
+            const n = parseInt(v, 10);
+            return (isNaN(n) || n < 10 || n > 2000) ? "Jumlah tamu antara 10 sampai 2000 orang." : "";
+        },
+        pesan: function () { return ""; }
+    };
+
+    function cekField(id) {
+        const input = document.getElementById(id);
+        const err = document.getElementById("err-" + id);
+        const pesan = aturan[id](input.value.trim());
+        if (pesan) {
+            err.textContent = pesan;
+            err.classList.remove("hidden");
+            input.classList.add("input-error");
+        } else {
+            err.classList.add("hidden");
+            input.classList.remove("input-error");
+        }
+        return !pesan;
+    }
+
+    Object.keys(aturan).forEach(function (id) {
+        const input = document.getElementById(id);
+        input.addEventListener("blur", function () { cekField(id); });
+        input.addEventListener("input", function () {
+            if (input.classList.contains("input-error")) cekField(id);
+        });
+    });
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        let valid = true;
+        Object.keys(aturan).forEach(function (id) {
+            if (!cekField(id)) valid = false;
+        });
+        if (!valid) {
+            const pertama = form.querySelector(".input-error");
+            if (pertama) pertama.focus();
+            return;
+        }
+        form.reset();
+    });
+})();
