@@ -227,3 +227,40 @@ function renderPortfolio() {
 
 renderFilter();
 renderPortfolio();
+document.addEventListener("DOMContentLoaded", function () {
+    const btnHitung = document.getElementById("btn-hitung");
+    const selectJenis = document.getElementById("calc-jenis");
+    const selectPaket = document.getElementById("calc-paket");
+    const inputTamu = document.getElementById("calc-tamu");
+    const calcResult = document.getElementById("calc-result");
+
+    if (btnHitung) {
+        btnHitung.addEventListener("click", function () {
+            let jumlahTamu = parseInt(inputTamu.value);
+
+            if (isNaN(jumlahTamu) || jumlahTamu <= 0) {
+                calcResult.innerHTML = `<p class="text-red-600 font-semibold">Silakan masukkan jumlah tamu yang valid (minimal 1).</p>`;
+                return;
+            }
+
+            let hargaPaket = 0;
+            if (selectPaket.value === "basic") hargaPaket = 15000000;
+            else if (selectPaket.value === "premium") hargaPaket = 35000000;
+            else if (selectPaket.value === "exclusive") hargaPaket = 75000000;
+
+            let biayaPerTamu = 0;
+            if (selectJenis.value === "wedding") biayaPerTamu = 150000;
+            else if (selectJenis.value === "birthday") biayaPerTamu = 75000;
+            else if (selectJenis.value === "seminar") biayaPerTamu = 60000;
+            else if (selectJenis.value === "corporate") biayaPerTamu = 100000;
+
+            let totalBiaya = hargaPaket + (jumlahTamu * biayaPerTamu);
+
+            calcResult.innerHTML = `
+                <h4 class="font-bold text-lg mb-2 text-[#104F55]">Rincian Estimasi Biaya:</h4>
+                <p>Jumlah Tamu: <strong>${jumlahTamu} orang</strong></p>
+                <p class="text-xl font-extrabold text-[#104F55] mt-3">Total: Rp ${totalBiaya.toLocaleString("id-ID")}</p>
+            `;
+        });
+    }
+})
