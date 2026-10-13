@@ -379,6 +379,47 @@ document.addEventListener('keydown', function(event) {
             if (pertama) pertama.focus();
             return;
         }
+
+                document.getElementById("cf-nama").textContent = document.getElementById("nama").value.trim();
+        document.getElementById("cf-email").textContent = document.getElementById("email").value.trim();
+        document.getElementById("cf-telepon").textContent = document.getElementById("telepon").value.trim();
+        document.getElementById("cf-jenis").textContent = document.getElementById("jenis").value;
+        document.getElementById("cf-tanggal").textContent = new Date(document.getElementById("tanggal").value + "T00:00:00")
+            .toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+        document.getElementById("cf-tamu").textContent = document.getElementById("tamu").value + " orang";
+        document.getElementById("confirm-modal").classList.remove("hidden");
+    });
+
+})();
+    (function () {
+    const form = document.getElementById("request-form");
+    const confirmModal = document.getElementById("confirm-modal");
+    const successModal = document.getElementById("success-modal");
+    if (!form || !confirmModal || !successModal) return;
+
+    function tutup(el) { el.classList.add("hidden"); }
+
+    document.getElementById("confirm-cancel").addEventListener("click", function () {
+        tutup(confirmModal);
+    });
+
+    document.getElementById("confirm-ok").addEventListener("click", function () {
+        document.getElementById("success-name").textContent = document.getElementById("nama").value.trim();
+        document.getElementById("success-event").textContent = document.getElementById("jenis").value;
+        tutup(confirmModal);
+        successModal.classList.remove("hidden");
         form.reset();
+    });
+
+    document.getElementById("close-success").addEventListener("click", function () {
+        tutup(successModal);
+    });
+
+    [confirmModal, successModal].forEach(function (m) {
+        m.addEventListener("click", function (e) { if (e.target === m) tutup(m); });
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") { tutup(confirmModal); tutup(successModal); }
     });
 })();

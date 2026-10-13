@@ -231,6 +231,24 @@
         </div>
     </footer>
 
+    <div id="confirm-modal" class="hidden">
+    <div class="modal-box pop-in">
+        <h3 class="modal-title">Apakah data sudah benar?</h3>
+        <ul class="confirm-list">
+            <li><span>Nama</span><strong id="cf-nama"></strong></li>
+            <li><span>Email</span><strong id="cf-email"></strong></li>
+            <li><span>Telepon</span><strong id="cf-telepon"></strong></li>
+            <li><span>Jenis acara</span><strong id="cf-jenis"></strong></li>
+            <li><span>Tanggal</span><strong id="cf-tanggal"></strong></li>
+            <li><span>Jumlah tamu</span><strong id="cf-tamu"></strong></li>
+        </ul>
+        <div class="modal-actions">
+            <button type="button" id="confirm-cancel" class="btn btn-secondary">Periksa Lagi</button>
+            <button type="button" id="confirm-ok" class="btn btn-primary">Ya, Kirim</button>
+        </div>
+    </div>
+</div>
+
     <div id="success-modal" class="modal modal-dim hidden">
         <div class="modal-box pop-in">
             <div class="modal-icon">✓</div>
@@ -244,7 +262,7 @@
     </div>
 
     <button id="back-to-top" class="back-to-top" type="button" aria-label="Kembali ke atas">↑</button>
-    
+
     <script src="script.js"></script>
 </body>
 </html>

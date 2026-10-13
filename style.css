@@ -320,3 +320,111 @@ body {
     display: block; width: 100%; text-align: center; 
 }\
 
+#confirm-modal, #success-modal { 
+    position: fixed; 
+    inset: 0; z-index: 60; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 1rem; background: rgba(1,21,2,.65); 
+}
+
+#confirm-modal.hidden, #success-modal.hidden { 
+    display: none; 
+}
+
+#confirm-modal .modal-box, #success-modal .modal-box { 
+    background: #fff; 
+    border-radius: 20px; 
+    padding: 2rem; 
+    max-width: 420px; 
+    width: 100%; 
+    text-align: center; 
+}
+
+#success-modal .modal-icon { 
+    width: 64px; 
+    height: 64px; 
+    margin: 0 auto 1rem; 
+    border-radius: 9999px; 
+    background: #104F55; color: #fff; 
+    font-size: 2rem; display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+#confirm-modal .modal-title, #success-modal .modal-title { 
+    font-size: 1.35rem; 
+    font-weight: 800; 
+    color: #104F55; 
+}
+
+#success-modal .modal-text { 
+    margin: .75rem 0 1.5rem; 
+    color: #4b5f55; 
+}
+
+.confirm-list { 
+    list-style: none; 
+    padding: 0; 
+    margin: 1.25rem 0 1.5rem; 
+    text-align: left; 
+    display: grid; 
+    gap: .5rem; 
+    font-size: .92rem; 
+}
+
+.confirm-list li { 
+    display: flex; 
+    justify-content: space-between; 
+    gap: 1rem; 
+    border-bottom: 1px solid #e2ece6; padding-bottom: .4rem; 
+}
+
+.confirm-list span { 
+    color: #4b5f55; 
+}
+
+.confirm-list strong { 
+    text-align: right; 
+    color: #011502; 
+}
+
+.modal-actions { 
+    display: flex; 
+    gap: .75rem; 
+    justify-content: center; 
+    flex-wrap: wrap; 
+}
+
+.btn-secondary { 
+    background: #fff; 
+    color: #104F55; 
+    border-color: #104F55; 
+    cursor: pointer; 
+}
+
+.btn-secondary:hover { 
+    background: #e4efe9; 
+    border-color: #104F55; 
+}
+
+.pop-in { 
+    animation: popIn .3s ease both; 
+}
+
+@keyframes popIn { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: scale(1); } }
+
+#success-modal, #confirm-modal {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 1rem !important;
+    background: rgba(1, 21, 2, .65) !important;
+}
+#success-modal.hidden, #confirm-modal.hidden {
+    display: none !important;
+}
