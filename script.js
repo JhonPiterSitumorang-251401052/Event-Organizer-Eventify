@@ -267,3 +267,39 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 })
+function openLightbox(cardElement) {
+    var modal = document.getElementById('lightbox-modal');
+    var lightboxImg = document.getElementById('lightbox-img');
+    var lightboxCaption = document.getElementById('lightbox-caption');
+
+    var imgElement = cardElement.querySelector('img');
+    var titleElement = cardElement.querySelector('h3');
+
+    if (imgElement && modal) {
+        lightboxImg.src = imgElement.src;
+        lightboxImg.alt = imgElement.alt;
+        lightboxCaption.innerText = titleElement ? titleElement.innerText : imgElement.alt;
+
+        modal.style.display = 'flex';
+    }
+}
+
+function closeLightbox(event) {
+    var modal = document.getElementById('lightbox-modal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+}
+
+function closeLightboxDirect() {
+    var modal = document.getElementById('lightbox-modal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === "Escape" || event.keyCode === 27) {
+        closeLightboxDirect();
+    }
+});
