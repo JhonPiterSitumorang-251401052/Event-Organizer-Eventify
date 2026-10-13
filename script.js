@@ -225,8 +225,6 @@ function renderPortfolio() {
         + EVENTS.length + " event pada kategori " + kategoriAktif + ".";
 }
 
-renderFilter();
-renderPortfolio();
 document.addEventListener("DOMContentLoaded", function () {
     const btnHitung = document.getElementById("btn-hitung");
     const selectJenis = document.getElementById("calc-jenis");
