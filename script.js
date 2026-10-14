@@ -495,3 +495,14 @@ document.addEventListener('keydown', function(event) {
         if (e.key === "Escape") { tutup(confirmModal); tutup(successModal); }
     });
 })();
+
+window.addEventListener('DOMContentLoaded', () => {
+    if (window.location.hash === '#gallery') {
+        const galleryElement = document.getElementById('gallery-title');
+        if (galleryElement) {
+            setTimeout(() => {
+                galleryElement.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    }
+});
