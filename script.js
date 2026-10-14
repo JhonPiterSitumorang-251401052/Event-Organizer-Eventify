@@ -1,25 +1,28 @@
 const menuBtn = document.getElementById("menu-btn");
 const mobileMenu = document.getElementById("mobile-menu");
 
-menuBtn.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-});
-
-mobileMenu.querySelectorAll("a").forEach(function (link) {
-    link.addEventListener("click", function () {
-        mobileMenu.classList.add("hidden");
+if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
     });
-});
+
+    mobileMenu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+            mobileMenu.classList.add("hidden");
+        });
+    });
+}
 
 const navbar = document.getElementById("navbar");
 
-window.addEventListener("scroll", function () {
-    if (window.scrollY > 20) {
-        navbar.classList.add("navbar-scrolled");
-    } else {
-        navbar.classList.remove("navbar-scrolled");
-    }
-});
+if (navbar) {
+    window.addEventListener("scroll", function () {
+        navbar.classList.toggle("navbar-scrolled", window.scrollY > 20);
+    });
+}
+
+const year = document.getElementById("year");
+if (year) year.textContent = new Date().getFullYear();
 
 const EVENTS = [
     {
@@ -230,43 +233,100 @@ document.addEventListener("DOMContentLoaded", function () {
         renderFilter();
         renderPortfolio();
     }
-    
+
     const btnHitung = document.getElementById("btn-hitung");
     const selectJenis = document.getElementById("calc-jenis");
     const selectPaket = document.getElementById("calc-paket");
     const inputTamu = document.getElementById("calc-tamu");
     const calcResult = document.getElementById("calc-result");
+    const calcError = document.getElementById("calc-error");
 
-    if (btnHitung) {
-        btnHitung.addEventListener("click", function () {
-            let jumlahTamu = parseInt(inputTamu.value);
+    if (btnHitung && selectJenis && selectPaket && inputTamu && calcResult && calcError) {
+        const hargaPaket = {
+            basic: 15000000,
+            premium: 35000000,
+            exclusive: 75000000
+        };
+        const biayaPerTamu = {
+            wedding: 150000,
+            birthday: 75000,
+            seminar: 60000,
+            corporate: 100000
+        };
+        const hargaTambahan = {
+            dekorasi: 5000000,
+            dokumentasi: 3000000,
+            hiburan: 4000000
+        };
 
-            if (isNaN(jumlahTamu) || jumlahTamu <= 0) {
-                calcResult.innerHTML = `<p class="text-red-600 font-semibold">Silakan masukkan jumlah tamu yang valid (minimal 1).</p>`;
+        function formatRupiah(jumlah) {
+            return "Rp " + jumlah.toLocaleString("id-ID");
+        }
+
+        function hitungBiaya(jumlahTamu) {
+            const biayaPaket = hargaPaket[selectPaket.value];
+            const biayaTamu = biayaPerTamu[selectJenis.value] * jumlahTamu;
+            const biayaTambahan = Array.from(document.querySelectorAll('input[name="addon"]:checked'))
+                .reduce(function (total, tambahan) {
+                    return total + (hargaTambahan[tambahan.value] || 0);
+                }, 0);
+
+            return {
+                biayaPaket: biayaPaket,
+                biayaTamu: biayaTamu,
+                biayaTambahan: biayaTambahan,
+                total: biayaPaket + biayaTamu + biayaTambahan
+            };
+        }
+
+        function tampilkanEstimasi() {
+            const jumlahTamu = Number(inputTamu.value);
+            if (!Number.isInteger(jumlahTamu) || jumlahTamu < 10 || jumlahTamu > 2000) {
+                calcError.textContent = "Jumlah tamu harus berupa bilangan bulat antara 10 sampai 2000 orang.";
+                calcError.classList.remove("hidden");
+                inputTamu.classList.add("input-error");
+                inputTamu.setAttribute("aria-invalid", "true");
+                inputTamu.focus();
                 return;
             }
 
-            let hargaPaket = 0;
-            if (selectPaket.value === "basic") hargaPaket = 15000000;
-            else if (selectPaket.value === "premium") hargaPaket = 35000000;
-            else if (selectPaket.value === "exclusive") hargaPaket = 75000000;
-
-            let biayaPerTamu = 0;
-            if (selectJenis.value === "wedding") biayaPerTamu = 150000;
-            else if (selectJenis.value === "birthday") biayaPerTamu = 75000;
-            else if (selectJenis.value === "seminar") biayaPerTamu = 60000;
-            else if (selectJenis.value === "corporate") biayaPerTamu = 100000;
-
-            let totalBiaya = hargaPaket + (jumlahTamu * biayaPerTamu);
+            calcError.classList.add("hidden");
+            inputTamu.classList.remove("input-error");
+            inputTamu.removeAttribute("aria-invalid");
+            const rincian = hitungBiaya(jumlahTamu);
+            calcResult.classList.add("has-result");
+            const itemTambahan = rincian.biayaTambahan
+                ? `<p>Layanan tambahan: <strong>${formatRupiah(rincian.biayaTambahan)}</strong></p>`
+                : "";
 
             calcResult.innerHTML = `
                 <h4 class="font-bold text-lg mb-2 text-[#104F55]">Rincian Estimasi Biaya:</h4>
-                <p>Jumlah Tamu: <strong>${jumlahTamu} orang</strong></p>
-                <p class="text-xl font-extrabold text-[#104F55] mt-3">Total: Rp ${totalBiaya.toLocaleString("id-ID")}</p>
+                <p>Harga paket: <strong>${formatRupiah(rincian.biayaPaket)}</strong></p>
+                <p>Biaya ${jumlahTamu} tamu: <strong>${formatRupiah(rincian.biayaTamu)}</strong></p>
+                ${itemTambahan}
+                <p class="text-xl font-extrabold text-[#104F55] mt-3">Total: ${formatRupiah(rincian.total)}</p>
             `;
+        }
+
+        btnHitung.addEventListener("click", tampilkanEstimasi);
+        inputTamu.addEventListener("input", function () {
+            if (!calcError.classList.contains("hidden")) {
+                calcError.classList.add("hidden");
+                inputTamu.classList.remove("input-error");
+                inputTamu.removeAttribute("aria-invalid");
+            }
+        });
+
+        document.querySelectorAll(".pilih-paket[data-paket]").forEach(function (link) {
+            link.addEventListener("click", function () {
+                selectPaket.value = link.dataset.paket;
+                if (Number.isInteger(Number(inputTamu.value)) && inputTamu.value !== "") {
+                    tampilkanEstimasi();
+                }
+            });
         });
     }
-})
+});
 function openLightbox(cardElement) {
     var modal = document.getElementById('lightbox-modal');
     var lightboxImg = document.getElementById('lightbox-img');
@@ -327,11 +387,17 @@ document.addEventListener('keydown', function(event) {
         + String(hariIni.getDate()).padStart(2, "0");
 
     const aturan = {
-        nama: function (v) { return v.length < 3 ? "Nama minimal 3 karakter." : ""; },
-        email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "" : "Format email tidak valid."; },
+        nama: function (v) {
+            if (v.length < 3) return "Nama minimal 3 karakter.";
+            if (v.length > 80) return "Nama maksimal 80 karakter.";
+            return /^[\p{L}\p{M}][\p{L}\p{M}\s.'-]*$/u.test(v) ? "" : "Nama hanya boleh berisi huruf, spasi, tanda titik, apostrof, atau tanda hubung.";
+        },
+        email: function (v) {
+            return v.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "" : "Masukkan alamat email yang valid (maksimal 254 karakter).";
+        },
         telepon: function (v) {
             const nomor = v.replace(/[\s-]/g, "");
-            return /^(\+62|62|0)8\d{8,11}$/.test(nomor) ? "" : "Nomor harus diawali 08 atau +628 (10-13 digit).";
+            return /^(\+62|62|0)8\d{8,11}$/.test(nomor) ? "" : "Masukkan nomor Indonesia yang diawali 08, 628, atau +628 (10-13 digit lokal).";
         },
         jenis: function (v) { return v ? "" : "Pilih jenis acara."; },
         tanggal: function (v) {
@@ -339,10 +405,10 @@ document.addEventListener('keydown', function(event) {
             return new Date(v + "T00:00:00") < hariIni ? "Tanggal tidak boleh sebelum hari ini." : "";
         },
         tamu: function (v) {
-            const n = parseInt(v, 10);
-            return (isNaN(n) || n < 10 || n > 2000) ? "Jumlah tamu antara 10 sampai 2000 orang." : "";
+            const n = Number(v);
+            return (!Number.isInteger(n) || n < 10 || n > 2000) ? "Jumlah tamu berupa bilangan bulat antara 10 sampai 2000 orang." : "";
         },
-        pesan: function () { return ""; }
+        pesan: function (v) { return v.length <= 500 ? "" : "Pesan maksimal 500 karakter."; }
     };
 
     function cekField(id) {
@@ -353,9 +419,11 @@ document.addEventListener('keydown', function(event) {
             err.textContent = pesan;
             err.classList.remove("hidden");
             input.classList.add("input-error");
+            input.setAttribute("aria-invalid", "true");
         } else {
             err.classList.add("hidden");
             input.classList.remove("input-error");
+            input.removeAttribute("aria-invalid");
         }
         return !pesan;
     }
@@ -364,6 +432,9 @@ document.addEventListener('keydown', function(event) {
         const input = document.getElementById(id);
         input.addEventListener("blur", function () { cekField(id); });
         input.addEventListener("input", function () {
+            if (input.classList.contains("input-error")) cekField(id);
+        });
+        input.addEventListener("change", function () {
             if (input.classList.contains("input-error")) cekField(id);
         });
     });
@@ -380,13 +451,14 @@ document.addEventListener('keydown', function(event) {
             return;
         }
 
-                document.getElementById("cf-nama").textContent = document.getElementById("nama").value.trim();
+        document.getElementById("cf-nama").textContent = document.getElementById("nama").value.trim();
         document.getElementById("cf-email").textContent = document.getElementById("email").value.trim();
         document.getElementById("cf-telepon").textContent = document.getElementById("telepon").value.trim();
         document.getElementById("cf-jenis").textContent = document.getElementById("jenis").value;
         document.getElementById("cf-tanggal").textContent = new Date(document.getElementById("tanggal").value + "T00:00:00")
             .toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
         document.getElementById("cf-tamu").textContent = document.getElementById("tamu").value + " orang";
+        document.getElementById("cf-pesan").textContent = document.getElementById("pesan").value.trim() || "-";
         document.getElementById("confirm-modal").classList.remove("hidden");
     });
 

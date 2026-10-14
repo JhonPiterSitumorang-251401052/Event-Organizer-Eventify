@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx @tailwindcss/cli -i input.css -o output.css",
-    "watch": "npx @tailwindcss/cli -i input.css -o output.css --watch",
+    "build": "npx @tailwindcss/cli -i ./input.css -o ./output.css",
+    "tailwind": "npx @tailwindcss/cli -i ./input.css -o ./output.css --watch",
+    "serve": "live-server --port=3000 --entry-file=index.html",
+    "dev": "concurrently \"npm run tailwind\" \"npm run serve\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,7 +15,11 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@tailwindcss/cli": "^4.3.3",
+    "@tailwindcss/cli": "^4.3.0",
     "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6",
+    "live-server": "^1.2.2"
   }
 }

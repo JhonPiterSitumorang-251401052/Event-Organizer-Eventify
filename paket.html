@@ -16,8 +16,8 @@
             <ul class="hidden md:flex items-center gap-8 font-medium">
                 <li><a href="index.html" class="nav-link hover:text-[#32746D]">Beranda</a></li>
                 <li><a href="index.html#layanan" class="nav-link hover:text-[#32746D]">Layanan</a></li>
-                <li><a href="portfolio.html" class="nav-link hover:text-[#32746D]">Portfolio</a></li>
-                <li><a href="portfolio.html#gallery" class="nav-link hover:text-[#32746D]">Gallery</a></li>
+                <li><a href="portofolio.html" class="nav-link hover:text-[#32746D]">Portfolio</a></li>
+                <li><a href="portofolio.html#gallery" class="nav-link hover:text-[#32746D]">Gallery</a></li>
                 <li><a href="paket.html" class="nav-link active hover:text-[#32746D]">Paket</a></li>
                 <li><a href="paket.html#calculator" class="nav-link hover:text-[#32746D]">Kalkulator</a></li>
             </ul>
@@ -27,8 +27,8 @@
         <ul id="mobile-menu" class="hidden md:hidden bg-white border-t border-[#9EC5AB] px-4 py-4 space-y-3 font-medium">
             <li><a href="index.html" class="block hover:text-[#32746D]">Beranda</a></li>
             <li><a href="index.html#layanan" class="block hover:text-[#32746D]">Layanan</a></li>
-            <li><a href="portfolio.html" class="block hover:text-[#32746D]">Portfolio</a></li>
-            <li><a href="portfolio.html#gallery" class="block hover:text-[#32746D]">Gallery</a></li>
+            <li><a href="portofolio.html" class="block hover:text-[#32746D]">Portfolio</a></li>
+            <li><a href="portofolio.html#gallery" class="block hover:text-[#32746D]">Gallery</a></li>
             <li><a href="paket.html" class="block text-[#32746D] font-semibold">Paket</a></li>
             <li><a href="paket.html#calculator" class="block hover:text-[#32746D]">Kalkulator</a></li>
             <li><a href="paket.html#request" class="block text-[#104F55] font-semibold">Request Event</a></li>
@@ -40,7 +40,6 @@
             <div class="wrap fade-up">
                 <p class="page-header-eyebrow">Paket dan Request</p>
                 <h1 class="page-header-title">Pilih Paket, Hitung Biaya, Kirim Request</h1>
-                <p class="page-header-text">Tiga paket dengan harga transparan, kalkulator estimasi, dan formulir request event dalam satu halaman.</p>
             </div>
         </section>
         <section id="paket" class="section section-alt">
@@ -50,7 +49,7 @@
                     <h2 class="section-title">Pilih Paket yang Sesuai</h2>
                     <p class="section-desc">Harga transparan, bisa disesuaikan dengan kebutuhan acaramu.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 grid-gap-lg items-stretch">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
                     <article class="pkg">
                         <h3 class="pkg-name">Basic</h3>
                         <p class="pkg-sub">Untuk acara sederhana, hingga 100 tamu</p>
@@ -103,13 +102,12 @@
         <section id="calculator" class="section">
             <div class="wrap-md">
                 <div class="section-head">
-                    <p class="section-label">Budget Calculator</p>
-                    <h2 class="section-title">Hitung Estimasi Biayamu</h2>
-                    <p class="section-desc">Masukkan jumlah tamu dan pilih jenis acara untuk perkiraan biaya.</p>
+                    <p class="section-label">Kalkulator Biaya</p>
+                    <h2 class="section-title">Kalkulator Estimasi Biaya</h2>
+                    <p class="section-desc">Pilih jenis acara dan paket, lalu masukkan jumlah tamu untuk melihat perkiraan biaya.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 grid-gap-lg">
-                    <!-- Input -->
-                    <div class="calc-box stack">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="calc-box">
                         <div>
                             <label for="calc-jenis" class="form-label">Jenis Acara</label>
                             <select id="calc-jenis" class="input-field">
@@ -129,8 +127,8 @@
                         </div>
                         <div>
                             <label for="calc-tamu" class="form-label">Jumlah Tamu</label>
-                            <input type="number" id="calc-tamu" class="input-field" placeholder="Contoh: 150" min="10" max="2000">
-                            <p id="calc-error" class="error-text hidden"></p>
+                            <input type="number" id="calc-tamu" class="input-field" placeholder="Contoh: 150" min="10" max="2000" step="1" aria-describedby="calc-error" required>
+                            <p id="calc-error" class="error-text hidden" role="alert"></p>
                         </div>
                         <fieldset>
                             <legend class="fieldset-title">Layanan Tambahan (opsional)</legend>
@@ -140,7 +138,7 @@
                         </fieldset>
                         <button id="btn-hitung" type="button" class="btn btn-primary btn-block">Hitung Estimasi</button>
                     </div>
-                    <div id="calc-result" class="calc-result">
+                    <div id="calc-result" class="calc-result" role="status" aria-live="polite">
                         <p>Hasil estimasi akan tampil di sini setelah kamu menekan tombol <strong>Hitung Estimasi</strong>.</p>
                     </div>
                 </div>
@@ -156,47 +154,47 @@
                 <form id="request-form" novalidate class="form-card grid grid-cols-1 md:grid-cols-2">
                     <div>
                         <label for="nama" class="form-label">Nama Lengkap</label>
-                        <input type="text" id="nama" class="input-field" placeholder="Nama kamu">
-                        <p id="err-nama" class="error-text hidden"></p>
+                        <input type="text" id="nama" class="input-field" placeholder="Nama kamu" maxlength="80" aria-describedby="err-nama" required>
+                        <p id="err-nama" class="error-text hidden" aria-live="polite"></p>
                     </div>
                     <div>
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" class="input-field" placeholder="nama@email.com">
-                        <p id="err-email" class="error-text hidden"></p>
+                        <input type="email" id="email" class="input-field" placeholder="nama@email.com" maxlength="254" aria-describedby="err-email" required>
+                        <p id="err-email" class="error-text hidden" aria-live="polite"></p>
                     </div>
                     <div>
                         <label for="telepon" class="form-label">No. Telepon / WhatsApp</label>
-                        <input type="tel" id="telepon" class="input-field" placeholder="08xxxxxxxxxx">
-                        <p id="err-telepon" class="error-text hidden"></p>
+                        <input type="tel" id="telepon" class="input-field" placeholder="08xxxxxxxxxx atau +628xxxxxxxxxx" maxlength="18" aria-describedby="err-telepon" required>
+                        <p id="err-telepon" class="error-text hidden" aria-live="polite"></p>
                     </div>
                     <div>
-                        <label for="jenis" class="form-label">Jenis Acara : </label>
-                        <select id="jenis" class="input-field">
+                        <label for="jenis" class="form-label">Jenis Acara</label>
+                        <select id="jenis" class="input-field" aria-describedby="err-jenis" required>
                             <option value="">Pilih jenis acara</option>
                             <option value="Wedding">Wedding</option>
                             <option value="Birthday">Birthday</option>
                             <option value="Seminar">Seminar</option>
                             <option value="Corporate Event">Corporate Event</option>
                         </select>
-                        <p id="err-jenis" class="error-text hidden"></p>
+                        <p id="err-jenis" class="error-text hidden" aria-live="polite"></p>
                     </div>
                     <div>
                         <label for="tanggal" class="form-label">Tanggal Acara</label>
-                        <input type="date" id="tanggal" class="input-field">
-                        <p id="err-tanggal" class="error-text hidden"></p>
+                        <input type="date" id="tanggal" class="input-field" aria-describedby="err-tanggal" required>
+                        <p id="err-tanggal" class="error-text hidden" aria-live="polite"></p>
                     </div>
                     <div>
                         <label for="tamu" class="form-label">Perkiraan Jumlah Tamu</label>
-                        <input type="number" id="tamu" class="input-field" placeholder="Contoh: 200">
-                        <p id="err-tamu" class="error-text hidden"></p>
+                        <input type="number" id="tamu" class="input-field" placeholder="Contoh: 200" min="10" max="2000" step="1" aria-describedby="err-tamu" required>
+                        <p id="err-tamu" class="error-text hidden" aria-live="polite"></p>
                     </div>
                     <div class="md:col-span-2">
                         <label for="pesan" class="form-label">Detail / Pesan</label>
-                        <textarea id="pesan" rows="4" class="input-field" placeholder="Ceritakan tema, lokasi, atau kebutuhan khusus..."></textarea>
-                        <p id="err-pesan" class="error-text hidden"></p>
+                        <textarea id="pesan" rows="4" class="input-field" maxlength="500" placeholder="Ceritakan tema, lokasi, atau kebutuhan khusus (maksimal 500 karakter)..."></textarea>
+                        <p id="err-pesan" class="error-text hidden" aria-live="polite"></p>
                     </div>
                     <div class="md:col-span-2">
-                        <button type="submit" class="btn btn-primary btn-block">Kirim Request</button>
+                        <button type="submit" class="btn btn-primary btn-block">Kirim Permintaan</button>
                     </div>
                 </form>
             </div>
@@ -204,7 +202,7 @@
     </main>
 
     <footer id="kontak" class="footer">
-        <div class="wrap grid grid-cols-1 md:grid-cols-3 grid-gap-lg">
+        <div class="wrap grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
                 <p class="footer-logo">Event<span>ify</span></p>
                 <p class="footer-text">Event organizer profesional untuk wedding, birthday, seminar, dan corporate event.</p>
@@ -227,7 +225,7 @@
             </div>
         </div>
         <div class="wrap">
-            <p class="footer-copy">&copy; <span id="year"></span>Hak cipta Eventify.</p>
+            <p class="footer-copy">&copy; <span id="year"></span> Hak cipta Eventify.</p>
         </div>
     </footer>
 
@@ -241,6 +239,7 @@
             <li><span>Jenis acara</span><strong id="cf-jenis"></strong></li>
             <li><span>Tanggal</span><strong id="cf-tanggal"></strong></li>
             <li><span>Jumlah tamu</span><strong id="cf-tamu"></strong></li>
+            <li><span>Detail / pesan</span><strong id="cf-pesan"></strong></li>
         </ul>
         <div class="modal-actions">
             <button type="button" id="confirm-cancel" class="btn btn-secondary">Periksa Lagi</button>
@@ -252,12 +251,12 @@
     <div id="success-modal" class="modal modal-dim hidden">
         <div class="modal-box pop-in">
             <div class="modal-icon">✓</div>
-            <h3 class="modal-title">Request Berhasil Dikirim!</h3>
+            <h3 class="modal-title">Permintaan Berhasil Dikirim!</h3>
             <p class="modal-text">
                 Terima kasih, <strong id="success-name"></strong>. Tim Eventify akan menghubungimu untuk acara
                 <strong id="success-event"></strong> dalam 1x24 jam.
             </p>
-            <button id="close-success" class="btn btn-primary">Tutup</button>
+            <button id="close-success" type="button" class="btn btn-primary">Tutup</button>
         </div>
     </div>
 
